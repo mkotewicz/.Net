@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adres">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ulica" Type="varchar" MaxLength="15" />
+    <Property Name="numerDomu" Type="int" />
+    <Property Name="numerMieszkania" Type="int" />
+    <Property Name="miasto" Type="varchar" MaxLength="15" />
+    <Property Name="kod" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Pracownik">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imie" Type="varchar" MaxLength="10" />
+    <Property Name="nazwisko" Type="varchar" MaxLength="10" />
+    <Property Name="pesel" Type="varchar" MaxLength="11" />
+    <Property Name="email" Type="varchar" MaxLength="10" />
+    <Property Name="telefon" Type="varchar" MaxLength="10" />
+    <Property Name="adresId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="10" />
+    <Property Name="Password" Type="varchar" MaxLength="15" />
+    <Property Name="Role" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <Association Name="FK_PRACOWNIK_ADRES">
+    <End Role="Adres" Type="Self.Adres" Multiplicity="1" />
+    <End Role="Pracownik" Type="Self.Pracownik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adres">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pracownik">
+        <PropertyRef Name="adresId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pracownik" EntityType="Self.Pracownik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PRACOWNIK_ADRES" Association="Self.FK_PRACOWNIK_ADRES">
+      <End Role="Adres" EntitySet="Adres" />
+      <End Role="Pracownik" EntitySet="Pracownik" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+        @if (User.Identity.IsAuthenticated)
+        {
+        <p>Dane pracowników</p>
+        <br>
+        <a href="@Url.Action("Index","RedaktorAdres")">@Helper.globalny("Adresy")</a>
+        <br><br>
+        <a href="@Url.Action("Index","RedaktorPracownik")">@Helper.globalny("Pracownicy")</a>
+        <br><br><br>
+        <a href="@Url.Action("SignOut","Home")">Wyloguj</a>
+        }        
+</div>

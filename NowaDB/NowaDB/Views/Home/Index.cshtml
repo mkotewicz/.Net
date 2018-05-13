@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@helper lokalny(string str){ 
+    <span style="background-color:aquamarine">
+        @str
+    </span>
+}
+<div class="row">
+    <p>
+        @if (User.Identity.IsAuthenticated)
+    {
+            <h1>Zalogowałeś się na konto administratora</h1>
+            <p>Możesz usuwać, dodawać, edytować i wyświetlać</p>
+        <p>Dane pracowników</p>
+        <br>
+        <a href="@Url.Action("Index","Admin")">@lokalny("Adresy")</a>
+        <br><br>
+        <a href="@Url.Action("Index","PracownikAdmin")">@lokalny("Pracownicy")</a>
+        <br><br><br>
+        <a href="@Url.Action("SignOut","Home")">Wyloguj</a>
+}
+    </p>
+</div>
